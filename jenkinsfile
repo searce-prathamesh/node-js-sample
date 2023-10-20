@@ -46,11 +46,11 @@ pipeline {
             }
         }
         
-        stage('Build') {
-            steps {
-                // Your build steps here
-            }
-        }
+//        stage('Build') {
+//            steps {
+//                // Your build steps here
+ //           }
+ //       }
         
         stage('Cleanup') {
             steps {
