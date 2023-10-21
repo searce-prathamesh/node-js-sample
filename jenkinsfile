@@ -28,7 +28,8 @@ pipeline {
                         sh "npm install"
 
                         def npmInstallSuccess = sh(script: "npm install", returnStatus: true)
-                        if (npmInstallSuccess != 0) {
+                        if (npmInstallSuccess != 0) 
+                        echo " success..."{
                             error("npm install failed")
                         }
                         
@@ -37,7 +38,7 @@ pipeline {
                         
                         // Store the cache for future builds
                         dir("${JENKINS_HOME}/caches") {
-                            sh "mv ${workspace}/npm-cache ${cacheKey}"
+                            sh "mv ${workspace}/ ${cacheKey}"
                        }
                     } else {
                         echo "Using cached npm dependencies..."
