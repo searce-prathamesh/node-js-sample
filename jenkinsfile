@@ -26,6 +26,11 @@ pipeline {
                         
                         // Run npm install and cache the dependencies
                         sh "npm install"
+
+                        def npmInstallSuccess = sh(script: "npm install", returnStatus: true)
+                        if (npmInstallSuccess != 0) {
+                            error("npm install failed")
+                        }
                         
                        // Stash the node_modules directory
                         stash(name: 'npm-cache', path: workspace)
