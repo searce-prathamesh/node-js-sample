@@ -45,7 +45,7 @@ pipeline {
                         
                         // Restore the cache
                         dir("${JENKINS_HOME}/caches/${cacheKey}") {
-                            unstash 'npm-cache'
+                            unstash 'workspace'
                         }
                     }
                 }
