@@ -31,9 +31,9 @@ pipeline {
 //                        stash(name: 'npm-cache', includes: 'node_modules', path: workspace)
                         
                         // Store the cache for future builds
-                        dir("${JENKINS_HOME}/caches") {
-                            sh "mv ${workspace}/npm-cache ${cacheKey}"
-                        }
+ //                       dir("${JENKINS_HOME}/caches") {
+ //                           sh "mv ${workspace}/npm-cache ${cacheKey}"
+ //                       }
                     } else {
                         echo "Using cached npm dependencies..."
                         
