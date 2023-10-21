@@ -8,16 +8,15 @@ pipeline {
             }
         }
         
-        stage('Cache NPM Dependencies') {
+        stage('NPM Install') {
             steps {
                 script {
-                   
-                        // Run npm install and cache the dependencies
-   
-                    }
+                    // Run npm install
+                    sh "npm install"
                 }
             }
         }
 
+        // Add more stages as needed for your build process
     }
-
+}
