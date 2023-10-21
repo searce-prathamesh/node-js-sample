@@ -11,54 +11,13 @@ pipeline {
         stage('Cache NPM Dependencies') {
             steps {
                 script {
-                    // Define a unique key for this cache, such as a Git commit hash or branch name
-//                    def cacheKey = "${GIT_COMMIT}"
-                    
-                    // Check if the cache already exists
-//                    def cacheExists = fileExists("${JENKINS_HOME}/caches/${cacheKey}")
-                    
-                    // Only run npm install if the cache doesn't exist
-//                    if (!cacheExists) {
-  //                      echo "Caching npm dependencies..."
-                        
-                        // Create a unique workspace for this stage
-   //                     def workspace = pwd()
-                        
+                   
                         // Run npm install and cache the dependencies
-     //                   sh "npm install"
-
-                    
-                        
-                       // Stash the node_modules directory
-       //                 stash(name: 'npm-cache', path: workspace)
-                        
-                        // Store the cache for future builds
-         //               dir("${JENKINS_HOME}/caches") {
-           //                 sh "mv ${workspace}/ ${cacheKey}"
-             //          }
-               //     } else {
-                 //       echo "Using cached npm dependencies..."
-                        
-                        // Restore the cache
-                   //     dir("${JENKINS_HOME}/caches/${cacheKey}") {
-                     //       unstash 'npm-cache'
-                       // }
-                    //}
+   
+                    }
                 }
             }
         }
-        
-//        stage('Build') {
-//            steps {
-//                // Your build steps here
- //           }
- //       }
-        
-        stage('Cleanup') {
-            steps {
-                // Remove the stash to free up disk space
-                unstash 'npm-cache'
-            }
-        }
+
     }
-}
+
