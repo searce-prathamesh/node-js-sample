@@ -22,7 +22,7 @@ pipeline {
                         echo "Caching npm dependencies..."
                         
                         // Create a unique workspace for this stage
-                        def workspace = pwd()
+                        def workspace = /var/lib/jenkins/workspace
                         
                         // Run npm install and cache the dependencies
                         sh "npm install"
