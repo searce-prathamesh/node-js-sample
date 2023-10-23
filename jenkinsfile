@@ -23,11 +23,6 @@ pipeline {
                 sh 'npm run'
             }
         }    
-        stage('Cleanup') {
-            steps {
-                // Remove the stash to free up disk space
-                unstash 'npm-cache'
-            }
         }
     }
 }
