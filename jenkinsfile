@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('Cache NPM Dependencies') {
+        stage('Cache Yarn Dependencies') {
             steps {
                 script {
                     // Define a unique key for this cache, such as a Git commit hash or branch name
@@ -17,51 +17,44 @@ pipeline {
                     // Check if the cache already exists
                     def cacheExists = fileExists("${JENKINS_HOME}/caches/${cacheKey}")
                     
-                    // Only run npm install if the cache doesn't exist
+                    // Only run yarn install if the cache doesn't exist
                     if (!cacheExists) {
-                        echo "Caching npm dependencies..."
+                        echo "Caching Yarn dependencies..."
                         
                         // Create a unique workspace for this stage
                         def workspace = pwd()
                         
-                        // Run npm install and cache the dependencies
-                        sh "npm install"
-
-                        def npmInstallSuccess = sh(script: "npm install", returnStatus: true)
-                        if (npmInstallSuccess != 0) 
-                        echo " success..."{
-                            error("npm install failed")
+                        // Run yarn install and cache the dependencies
+                        sh "yarn install"
+                        
+                        def yarnInstallSuccess = sh(script: "yarn install", returnStatus: true)
+                        if (yarnInstallSuccess != 0) {
+                            error("Yarn install failed")
                         }
                         
-                       // Stash the node_modules directory
-                        stash(name: 'npm-cache', path: workspace)
+                        // Stash the node_modules directory
+                        stash(name: 'yarn-cache', path: workspace)
                         
                         // Store the cache for future builds
                         dir("${JENKINS_HOME}/caches") {
                             sh "mv ${workspace}/ ${cacheKey}"
-                       }
+                        }
                     } else {
-                        echo "Using cached npm dependencies..."
+                        echo "Using cached Yarn dependencies..."
                         
                         // Restore the cache
                         dir("${JENKINS_HOME}/caches/${cacheKey}") {
-                            unstash 'workspace'
+                            unstash 'yarn-cache'
                         }
                     }
                 }
             }
         }
         
-//        stage('Build') {
-//            steps {
-//                // Your build steps here
- //           }
- //       }
-        
         stage('Cleanup') {
             steps {
                 // Remove the stash to free up disk space
-                unstash 'npm-cache'
+                unstash 'yarn-cache'
             }
         }
     }
