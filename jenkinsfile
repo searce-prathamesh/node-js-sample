@@ -26,13 +26,19 @@ pipeline {
                         
                         // Run npm install and cache the dependencies
                         sh "npm install"
+
+                        def npmInstallSuccess = sh(script: "npm install", returnStatus: true)
+                        if (npmInstallSuccess != 0) 
+                        echo " success..."{
+                            error("npm install failed")
+                        }
                         
                        // Stash the node_modules directory
                         stash(name: 'npm-cache', path: workspace)
                         
                         // Store the cache for future builds
                         dir("${JENKINS_HOME}/caches") {
-                            sh "mv ${workspace}/npm-cache ${cacheKey}"
+                            sh "mv ${workspace}/ ${cacheKey}"
                        }
                     } else {
                         echo "Using cached npm dependencies..."
@@ -45,11 +51,13 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
-                sh 'npm run'
-            }
-        }    
+        
+//        stage('Build') {
+//            steps {
+//                // Your build steps here
+ //           }
+ //       }
+        
         stage('Cleanup') {
             steps {
                 // Remove the stash to free up disk space
@@ -58,4 +66,3 @@ pipeline {
         }
     }
 }
-
