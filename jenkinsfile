@@ -24,7 +24,7 @@ pipeline {
                         def workspace = pwd()
                         
                         // Run yarn install and cache the dependencies
-                    yarn command: 'init -y', workspaceSubdirectory 'npm-project'
+                         sh "yarn install"
                         
                      
                         // Stash the node_modules directory
