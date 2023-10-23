@@ -13,8 +13,7 @@ pipeline {
                 script {
                     def yarnCacheDir = "${HOME}/.yarn-cache"
                     sh "mkdir -p ${yarnCacheDir}"
-                    sh "yarn config set cache-folder ${yarnCacheDir}"
-                    sh 'yarn install'
+                    sh "yarn install --cache-folder ${yarnCacheDir}"
                 }
             }
         }
