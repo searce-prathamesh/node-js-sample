@@ -26,11 +26,7 @@ pipeline {
                         // Run yarn install and cache the dependencies
                         sh "yarn install"
                         
-                        def yarnInstallSuccess = sh(script: "yarn install", returnStatus: true)
-                        if (yarnInstallSuccess != 0) {
-                            error("Yarn install failed")
-                        }
-                        
+                     
                         // Stash the node_modules directory
                         stash(name: 'yarn-cache', path: workspace)
                         
