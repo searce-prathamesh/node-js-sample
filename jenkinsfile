@@ -11,6 +11,8 @@ pipeline {
         stage('Cache NPM Dependencies') {
             steps {
                 script {
+
+                    cleanWs()
                     // Define a unique key for this cache, such as a Git commit hash or branch name
                     def cacheKey = "${GIT_COMMIT}"
                     
@@ -22,7 +24,7 @@ pipeline {
                         echo "Caching npm dependencies..."
                         
                         // Create a unique workspace for this stage
-                        def workspace = /var/lib/jenkins/workspace
+                        def workspace = pwd()
                         
                         // Run npm install and cache the dependencies
                         sh "npm install"
