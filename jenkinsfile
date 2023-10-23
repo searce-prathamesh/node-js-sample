@@ -19,11 +19,11 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'yarn run'
+                sh 'yarn install'
             }
         stage('Test') {
             steps {
-                sh 'npm run'
+                sh 'yarn run'
             }
         }
     }
