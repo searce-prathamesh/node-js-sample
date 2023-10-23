@@ -17,12 +17,12 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'yarn build'
+                sh 'yarn run'
             }
         }
         stage('Test') {
             steps {
-                sh 'yarn run'
+                sh 'yarn test'
             }
         }
     }
