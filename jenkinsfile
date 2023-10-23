@@ -1,56 +1,27 @@
 pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+  agent any
+    
+  tools {nodejs "NodeJS"}
+    
+  stages {
         
-        stage('Cache Yarn Dependencies') {
-            steps {
-                script {
-                    // Define a unique key for this cache, such as a Git commit hash or branch name
-                    def cacheKey = "${GIT_COMMIT}"
-                    
-                    // Check if the cache already exists
-                    def cacheExists = fileExists("${JENKINS_HOME}/caches/${cacheKey}")
-                    
-                    // Only run yarn install if the cache doesn't exist
-                    if (!cacheExists) {
-                        echo "Caching Yarn dependencies..."
-                        
-                        // Create a unique workspace for this stage
-                        def workspace = pwd()
-                        
-                        // Run yarn install and cache the dependencies
-                         sh "yarn install"
-                        
-                     
-                        // Stash the node_modules directory
-                        stash(name: 'yarn-cache', path: workspace)
-                        
-                        // Store the cache for future builds
-                        dir("${JENKINS_HOME}/caches") {
-                            sh "mv ${workspace}/ ${cacheKey}"
-                        }
-                    } else {
-                        echo "Using cached Yarn dependencies..."
-                        
-                        // Restore the cache
-                        dir("${JENKINS_HOME}/caches/${cacheKey}") {
-                            unstash 'yarn-cache'
-                        }
-                    }
-                }
-            }
-        }
-        
-        stage('Cleanup') {
-            steps {
-                // Remove the stash to free up disk space
-                unstash 'yarn-cache'
-            }
-        }
+    stage('Git') {
+      steps {
+        git 'https://github.com/searce-prathamesh/node-js-sample'
+      }
     }
+     
+    stage('Build') {
+      steps {
+        sh 'npm install'
+      }
+    }  
+    
+            
+    stage('Test') {
+      steps {
+        sh 'npm run'
+      }
+    }
+  }
 }
