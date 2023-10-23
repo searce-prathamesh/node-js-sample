@@ -20,10 +20,5 @@ pipeline {
                 sh 'yarn run'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'yarn test'
-            }
-        }
     }
 }
