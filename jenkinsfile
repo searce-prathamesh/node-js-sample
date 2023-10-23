@@ -31,7 +31,7 @@ pipeline {
                         sh "ls -l"
                         
                        // Stash the node_modules directory
-                      stash(name: 'npm-cache', includes: 'node_modules', path: workspace)
+                      stash(name: 'npm-cache', path: workspace)
                         
                         // Store the cache for future builds
                         dir("${JENKINS_HOME}/caches") {
