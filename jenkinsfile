@@ -24,7 +24,7 @@ pipeline {
                         def workspace = pwd()
                         
                         // Run yarn install and cache the dependencies
-                        sh "yarn install"
+                        sh "npm install -g yarn"
                         
                      
                         // Stash the node_modules directory
