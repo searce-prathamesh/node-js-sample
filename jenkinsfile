@@ -1,6 +1,7 @@
 pipeline {
     agent any
-    
+    environment {
+        PATH = "/var/lib/jenkins/workspace/npm-project:${env.PATH}"
     stages {
         stage('Checkout') {
             steps {
