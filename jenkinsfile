@@ -45,14 +45,11 @@ pipeline {
                 }
             }
         }
-        
-    
-            
-    stage('Test') {
-      steps {
-        sh 'npm run'
-      }
-
+        stage('Test') {
+            steps {
+                sh 'npm run'
+            }
+        }    
         stage('Cleanup') {
             steps {
                 // Remove the stash to free up disk space
@@ -60,5 +57,4 @@ pipeline {
             }
         }
     }
-}
 }
