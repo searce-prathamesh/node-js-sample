@@ -31,7 +31,7 @@ pipeline {
                         sh "ls -l"
                         
                        // Stash the node_modules directory
-                       stash includes: 'node_modules', name: 'npm-cache'
+                       stash includes: 'node_modules', name: 'npm-cache', exclude: 'package.json'
                         
                         // Store the cache for future builds
                         dir("${JENKINS_HOME}/caches") {
