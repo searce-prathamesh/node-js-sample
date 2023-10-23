@@ -26,6 +26,7 @@ pipeline {
                         
                         // Run npm install and cache the dependencies
                         sh "npm install"
+                        sh "ls -l"
                         
                        // Stash the node_modules directory
                         stash(name: 'npm-cache', includes: 'node_modules', path: workspace)
