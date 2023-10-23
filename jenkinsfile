@@ -14,10 +14,13 @@ pipeline {
                     def npmCacheDir = "${HOME}/.npm-cache"
                     sh "mkdir -p ${npmCacheDir}"
                     sh "npm config set cache ${npmCacheDir}"
-                    sh 'yarn install'
                 }
             }
         }
+        stage('build') {
+            steps {
+                sh 'yarn run'
+            }
         stage('Test') {
             steps {
                 sh 'npm run'
