@@ -1,26 +1,63 @@
 pipeline {
-  agent any
+    agent any
     
-    
-  stages {
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         
-    stage('Git') {
-      steps {
-        git 'https://github.com/searce-prathamesh/node-js-sample'
-      }
-    }
-     
-    stage('Build') {
-      steps {
-        sh 'npm install'
-      }
-    }  
+        stage('Cache NPM Dependencies') {
+            steps {
+                script {
+                    // Define a unique key for this cache, such as a Git commit hash or branch name
+                    def cacheKey = "${GIT_COMMIT}"
+                    
+                    // Check if the cache already exists
+                    def cacheExists = fileExists("${JENKINS_HOME}/caches/${cacheKey}")
+                    
+                    // Only run npm install if the cache doesn't exist
+                    if (!cacheExists) {
+                        echo "Caching npm dependencies..."
+                        
+                        // Create a unique workspace for this stage
+                        def workspace = pwd()
+                        
+                        // Run npm install and cache the dependencies
+                        sh "npm install"
+                        
+                       // Stash the node_modules directory
+                        stash(name: 'npm-cache', includes: 'node_modules', path: workspace)
+                        
+                        // Store the cache for future builds
+                        dir("${JENKINS_HOME}/caches") {
+                            sh "mv ${workspace}/npm-cache ${cacheKey}"
+                       }
+                    } else {
+                        echo "Using cached npm dependencies..."
+                        
+                        // Restore the cache
+                        dir("${JENKINS_HOME}/caches/${cacheKey}") {
+                            unstash 'npm-cache'
+                        }
+                    }
+                }
+            }
+        }
+        
     
             
     stage('Test') {
       steps {
         sh 'npm run'
       }
+
+        stage('Cleanup') {
+            steps {
+                // Remove the stash to free up disk space
+                unstash 'npm-cache'
+            }
+        }
     }
-  }
 }
