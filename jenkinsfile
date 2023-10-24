@@ -15,9 +15,9 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def npmCacheDir = "${HOME}/.npm-cache"
-                    sh "mkdir -p ${npmCacheDir}"
-                    sh "npm config set cache ${npmCacheDir}"
+                    def yarnCacheDir = "${HOME}/.yarn-cache"
+                    sh "mkdir -p ${yarnCacheDir}"
+                    withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
                     sh 'yarn install'
                 }
             }
