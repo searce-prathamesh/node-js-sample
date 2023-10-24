@@ -18,7 +18,6 @@ pipeline {
                     def npmCacheDir = "${HOME}/.npm-cache"
                     sh "mkdir -p ${npmCacheDir}"
                     sh "npm config set cache ${npmCacheDir}"
-                    sh 'npm install --package-lock-only'
                     sh 'npm ci'
                 }
             }
