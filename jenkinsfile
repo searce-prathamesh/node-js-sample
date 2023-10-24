@@ -19,7 +19,7 @@ pipeline {
                     sh "mkdir -p ${npmCacheDir}"
                     sh "npm config set cache ${npmCacheDir}"
                     sh 'yarn install --frozen-lockfile'
-                    sh 'npm ci'
+                    sh 'yarn install'
                 }
             }
         }
