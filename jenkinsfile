@@ -17,8 +17,8 @@ pipeline {
                 script {
                     def npmCacheDir = "${HOME}/.npm-cache"
                     sh "mkdir -p ${npmCacheDir}"
-//                    sh "npm config set cache ${npmCacheDir}"
-                    sh 'npm ci'
+                    sh "npm config set cache ${npmCacheDir}"
+                    sh 'yarn install'
                 }
             }
         }
