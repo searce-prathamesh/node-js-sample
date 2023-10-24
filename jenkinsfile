@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'yarn test' // Replace with your test command
+                sh 'npm test' // Replace with your test command
             }
         }
     }
