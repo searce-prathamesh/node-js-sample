@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('build') {
             steps {
                 script {
                     def yarnCacheDir = "${HOME}/.yarn-cache"
