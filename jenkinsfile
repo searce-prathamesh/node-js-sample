@@ -18,7 +18,7 @@ pipeline {
                     def npmCacheDir = "${HOME}/.npm-cache"
                     sh "mkdir -p ${npmCacheDir}"
                     sh "npm config set cache ${npmCacheDir}"
-                    sh 'yarn install --frozen-lockfile'
+                    sh 'npm install --package-lock-only'
                     sh 'yarn install'
                 }
             }
