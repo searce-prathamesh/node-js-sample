@@ -6,13 +6,13 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('git Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Install Dependencies') {
+        stage('build') {
             steps {
                 script {
                     def npmCacheDir = "${HOME}/.npm-cache"
@@ -26,7 +26,6 @@ pipeline {
             steps {
                 sh 'npm test' // Replace with your test command
             }
-        }
-        
+        }      
 }
 }
