@@ -17,7 +17,7 @@ pipeline {
                 script {
                     def yarnCacheDir = "${HOME}/.yarn-cache"
                     sh "mkdir -p ${yarnCacheDir}"
-                    withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
+//                    withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
                     sh 'yarn install'
                     }
                 }
