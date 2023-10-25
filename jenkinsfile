@@ -19,13 +19,13 @@ pipeline {
                    }
                 }
             }
-        }
+        
 
         stage('Test') {
             steps {
-                sh 'npm test' // Replace with your test command
+                sh 'yarn test' // Replace with your test command
             }
         }
     }
-
+}
 
