@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('git Checkout') {
             steps {
-                checkout scm
+                checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: src]], branches: [[name: 'refs/tags/v1.1.0']]], poll: false
             }
         }
 
