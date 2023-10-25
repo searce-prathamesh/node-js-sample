@@ -22,7 +22,7 @@ pipeline {
             }
 
         stage('Deploy') {
-            when { tag "v1.0.0" }
+            when { tag "v1.1.0" }
             steps {
                 echo 'Deploying only because this commit is tagged...'
                 sh 'npm test'
