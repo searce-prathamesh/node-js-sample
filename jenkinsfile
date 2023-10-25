@@ -20,13 +20,15 @@ pipeline {
                    }
                 }
             }
-        
 
-        stage('Test') {
+        stage('Deploy') {
+            when { tag "v1.0.0" }
             steps {
-                sh 'npm test' // Replace with your test command
+                echo 'Deploying only because this commit is tagged...'
+                sh 'npm test'
             }
         }
+         
     }
 }
 
