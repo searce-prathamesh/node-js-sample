@@ -15,7 +15,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'pnpm install'                    
+                    sh 'wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm'   
+                    sh 'npm install -g pnpm'
                 }
             }
         }
