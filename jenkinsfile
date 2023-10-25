@@ -8,16 +8,7 @@ pipeline {
     stages {
         stage('git Checkout') {
             steps {
-                script {
-                    checkout(
-                        scm: [
-                            $class: 'GitSCM',
-                            userRemoteConfigs: [[url: 'https://github.com/searce-prathamesh/node-js-sample.git']],
-                            branches: [[name: 'refs/tags/v1.1.0']]
-                        ],
-                        poll: false
-                    )
-                }
+                checkout scm
             }
         }
 
@@ -25,13 +16,14 @@ pipeline {
             steps {
                 script {
                     sh 'yarn install'
-                    echo "Installed dependencies"
                 }
             }
         }
 
         stage('Deploy') {
-            when { tag "v1.1.0" }
+            when {
+                tag "v1.1.0"
+            }
             steps {
                 echo 'Deploying only because this commit is tagged...'
                 sh 'npm test'
