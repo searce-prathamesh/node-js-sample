@@ -8,7 +8,16 @@ pipeline {
     stages {
         stage('git Checkout') {
             steps {
-                checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/searce-prathamesh/node-js-sample.git']], branches: [[name: 'refs/tags/v1.1.0']]], poll: false)
+                script {
+                    checkout(
+                        scm: [
+                            $class: 'GitSCM',
+                            userRemoteConfigs: [[url: 'https://github.com/searce-prathamesh/node-js-sample.git']],
+                            branches: [[name: 'refs/tags/v1.1.0']]
+                        ],
+                        poll: false
+                    )
+                }
             }
         }
 
