@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'npm install -g @pnpm/exe'                    
+                    sh 'pnpm install'                    
                 }
             }
         }
