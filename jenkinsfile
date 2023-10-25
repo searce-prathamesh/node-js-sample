@@ -15,11 +15,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-//                    def yarnCacheDir = "${HOME}/.yarn-cache"
-//                    sh "mkdir -p ${yarnCacheDir}"
-//                    withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
                     sh 'yarn install'
-//                    }
+                   }
                 }
             }
         }
@@ -31,4 +28,4 @@ pipeline {
         }
     }
 
-}
+
