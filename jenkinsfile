@@ -1,33 +1,26 @@
 pipeline {
-    agent any // Use any available Jenkins agent
-
-    environment {
-        NODE_ENV = 'production' // Set the desired environment if needed
+  agent any // Use any available Jenkins agent
+  environment {
+    NODE_ENV = 'production' // Set the desired environment if needed
+  }
+  stages {
+    stage('git Checkout') {
+      steps {
+        checkout scm
+      }
     }
-
-    stages {
-        stage('git Checkout') {
-            steps {
-                checkout scm
-            }
+    stage('Install Dependencies') {
+      steps {
+        script {
+            sh 'yarn install'
         }
-
-        stage('Build') {
-            steps {
-                script {
-                sh 'pnpm install'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            when {
-                tag "v1.1.0"
-            }
-            steps {
-                echo 'Deploying only because this commit is tagged...'
-                sh 'npm test'
-            }
-        }
+      }
     }
+    stage('Test') {
+      steps {
+        sh 'npm test' // Replace with your test command
+      }
+    }
+  }
 }
+
