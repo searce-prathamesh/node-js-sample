@@ -16,12 +16,13 @@ pipeline {
                     sh "mkdir -p ${pnpmCacheDir}"
                     sh "pnpm config set cache ${pnpmCacheDir}"
                     sh "sudo npm install -g pnpm" 
-
+            }
+          }
+        }
     stage('Test') {
       steps {
         sh 'npm test' // Replace with your test command
       }
     }
   }
-}
-}
+
