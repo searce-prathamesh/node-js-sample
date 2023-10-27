@@ -9,23 +9,15 @@ pipeline {
         checkout scm
       }
     }
-    stage('Install Dependencies') {
+   stage('build') {
             steps {
                 script {
-                    // Cache the PNPM store
-                    stash(name: 'pnpm-cache', includes: '**/.pnpm-store')
-                }
+                    def pnpmCacheDir = "${HOME}/.pnpm-cache"
+                    sh "mkdir -p ${pnpmCacheDir}"
+                    sh "pnpm config set cache ${pnpmCacheDir}"
+                    sh "sudo npm install -g pnpm@3" 
             }
-        }
-
-        stage('Build and Test') {
-            steps {
-                script {
-                    // Restore the cached PNPM store
-                    unstash 'pnpm-cache'
-                    sh 'sudo npm install -g pnpm'
-                }
-            }
+          }
         }
     
     stage('Test') {
