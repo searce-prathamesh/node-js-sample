@@ -9,29 +9,17 @@ pipeline {
         checkout scm
       }
     }
-   stage('build') {
-            steps {
-                script {
-//                    def desiredNodeVersion = '16.20.2' // Set your desired Node.js version
- //                   def pnpmCacheDir = "${HOME}/.pnpm-cache"
-                    sh "mkdir -p ${pnpmCacheDir}"
-                    sh "pnpm config set cache ${pnpmCacheDir}"
-
-//                    def nodeInstallScript = "nvm install ${desiredNodeVersion}"
-//                    def nodeUseScript = "nvm use ${desiredNodeVersion}"
-
-                    // Install and use the desired Node.js version
-//                    sh "${nodeInstallScript}"
-//                    sh "${nodeUseScript}"
-
-                    sh "sudo npm install -g pnpm" 
+   stage('Install Dependencies') {
+      steps {
+        script {
+            sh 'sudo npm install -g pnpm'
+        }
+      }
+    }
 
               
 
-            }
-          }
-        }
-    
+            
     stage('Test') {
       steps {
         sh 'npm test' // Replace with your test command
