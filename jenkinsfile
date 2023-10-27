@@ -15,7 +15,8 @@ pipeline {
                     def pnpmCacheDir = "${HOME}/.pnpm-cache"
                     sh "mkdir -p ${pnpmCacheDir}"
                     sh "pnpm config set cache ${pnpmCacheDir}"
-                    sh "sudo npm install -g pnpm@8.9.2" 
+                    sh "nvm i stable"
+                    sh "sudo npm install -g pnpm" 
             }
           }
         }
