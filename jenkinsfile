@@ -12,7 +12,7 @@ pipeline {
    stage('build') {
             steps {
                 script {
-                    def desiredNodeVersion = '16.14.0' // Set your desired Node.js version
+                    def desiredNodeVersion = '16.20.2' // Set your desired Node.js version
                     def pnpmCacheDir = "${HOME}/.pnpm-cache"
                     sh "mkdir -p ${pnpmCacheDir}"
                     sh "pnpm config set cache ${pnpmCacheDir}"
