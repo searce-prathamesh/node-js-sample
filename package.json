@@ -10,7 +10,7 @@
     "express": "^4.13.3"
   },
   "engines": {
-    "node": "v16.20.2"
+    "node": "v10.19.0"
   },
   "repository": {
     "type": "git",
