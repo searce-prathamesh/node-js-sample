@@ -13,9 +13,10 @@ pipeline {
             steps {
                 script {
                     def pnpmCacheDir = "${HOME}/.pnpm-cache"
-                    sh "mkdir -p ${pnpmCacheDir}"                   
-                    sh "pnpm config set cache ${pnpmCacheDir}"              
+                    sh "mkdir -p ${pnpmCacheDir}"        
                     sh "sudo npm install -g pnpm" 
+                    sh "pnpm config set cache ${pnpmCacheDir}"              
+                    
             }
           }
         }
