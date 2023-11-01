@@ -14,7 +14,7 @@ pipeline {
         script {
             def pnpmCacheDir = "${HOME}/.pnpm-cache"
             sh "mkdir -p ${pnpmCacheDir}"
-            sh "pnpm config set store-dir ${pnpmCacheDir}"
+            sh "npm config set store-dir ${pnpmCacheDir}"
             sh "pnpm install -g pnpm"
         }
     }
