@@ -1,29 +1,21 @@
 pipeline {
-  agent any // Use any available Jenkins agent
-  environment {
-    NODE_ENV = 'production' // Set the desired environment if needed
-  }
+  agent any
   stages {
-    stage('git Checkout') {
+    stage('Git') {
       steps {
-        checkout scm
+        git 'https://github.com/searce-prathamesh/node-js-sample'
       }
     }
-   stage('Install pnpm') {
-    steps {
-        script {
-            def pnpmCacheDir = "${HOME}/.pnpm-cache"
-            sh "mkdir -p ${pnpmCacheDir}"
-            sh "npm config set store-dir ${pnpmCacheDir}"
-            sh "sudo npm install -g pnpm "
+    stage('Build') {
+      steps {
+        sh 'npm install'
         }
     }
-}
-
     stage('Test') {
       steps {
-        sh 'npm test' // Replace with your test command
+      sh 'npm run'
       }
     }
   }
 }
+
