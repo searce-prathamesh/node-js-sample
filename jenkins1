@@ -12,7 +12,7 @@ pipeline {
           def yarnCacheDir = "${HOME}/.yarn-cache"
           sh "mkdir -p ${yarnCacheDir}"
           withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
-            sh 'yarn install'
+            sh 'npm install -g yarn'
           }
         }
       }
