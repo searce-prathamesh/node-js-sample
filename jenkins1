@@ -1,6 +1,8 @@
 pipeline {
   agent any
-  tools {nodejs "nodejs"}
+  tools {
+    nodejs "nodejs"
+  }
   stages {
     stage('git Checkout') {
       steps {
@@ -14,14 +16,14 @@ pipeline {
 //          sh "mkdir -p ${yarnCacheDir}"
 //          withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
             sh 'npm install -g yarn'
-          }
+//          }
         }
       }
     }
-    stage('run app') {
+    stage('Run App') {
       steps {
         sh 'npm run' // Replace with your test command
       }
     }
+  }
 }
-
