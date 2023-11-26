@@ -23,5 +23,5 @@ pipeline {
         sh 'npm run' // Replace with your test command
       }
     }
-  }
+}
 
