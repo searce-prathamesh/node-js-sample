@@ -10,9 +10,9 @@ pipeline {
     stage('Install Dependencies') {
       steps {
         script {
-          def yarnCacheDir = "${HOME}/.yarn-cache"
-          sh "mkdir -p ${yarnCacheDir}"
-          withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
+//          def yarnCacheDir = "${HOME}/.yarn-cache"
+//          sh "mkdir -p ${yarnCacheDir}"
+//          withEnv(["YARN_CACHE=${yarnCacheDir}"]) {
             sh 'npm install -g yarn'
           }
         }
