@@ -18,9 +18,9 @@ pipeline {
         }
       }
     }
-    stage('Test') {
+    stage('run app') {
       steps {
-        sh 'npm test' // Replace with your test command
+        sh 'npm run' // Replace with your test command
       }
     }
   }
