@@ -2,7 +2,7 @@ pipeline {
   agent any // Use any available Jenkins agent
   tools {nodejs "nodejs"}
   environment {
-    NODE_ENV = 'production' // Set the desired environment if needed
+    NODE_ENV = 'production' // Set the desired environment if need
   }
   stages {
     stage('git Checkout') {
